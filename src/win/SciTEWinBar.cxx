@@ -712,7 +712,7 @@ static LRESULT PASCAL TabWndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM
 
 	switch (iMessage) {
 
-	case WM_LBUTTONDOWN: 
+	case WM_LBUTTONDOWN:
 		{
 			const GUI::Point pt = PointFromLong(lParam);
 			iLastClickTab = TabAtPoint(hWnd, pt);
@@ -722,7 +722,7 @@ static LRESULT PASCAL TabWndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM
 	case WM_PAINT:
 		{
 			HFONT hfont = (HFONT)SendMessageW(hWnd, WM_GETFONT, 0, 0);
-		
+
 			PAINTSTRUCT ps;
 			HDC hdc = BeginPaint(hWnd, &ps);
 
@@ -737,53 +737,30 @@ static LRESULT PASCAL TabWndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM
 			int selectedIndex = SendMessageW(hWnd, TCM_GETCURSEL, 0, 0);
 
 			RECT rc;
-			for (int i=0;i< tabCount;i++)
-			{ 
-				SendMessageW(hWnd, TCM_GETITEMRECT, i, (LPARAM) & rc);
+			for (int i=0;i< tabCount;i++) {
+				SendMessageW(hWnd, TCM_GETITEMRECT, i, reinterpret_cast<LPARAM>(&rc));
 
 				// tab right  border
 				FillRect(hdc, &rc, TAB_BORDER_BRUSH_DARK);
 
 				// tab background
 				rc.right -= 1;
-				FillRect(hdc, &rc, i == selectedIndex ? TAB_SELECTED_BG_BRUSH_DARK : BG_BRUSH_DARK);  
+				FillRect(hdc, &rc, i == selectedIndex ? TAB_SELECTED_BG_BRUSH_DARK : BG_BRUSH_DARK);
 
-				if (i == selectedIndex)
-				{
-					//if hilite_at_bottom :
-					//	// TODO : why 2 ? ? ?
-					//	user32.FillRect(hdc, byref(RECT(rc.left - (1 if idx else 0), rc.bottom - 3, rc.right + 1, rc.bottom)), TAB_SELECTED_HILITE_BRUSH)
-					//else :
-					RECT rc2 = RECT(rc.left - (i ? 1 : 0), rc.top, rc.right + 1, rc.top + 2);
-					FillRect(hdc, &rc2, TAB_SELECTED_HILITE_BRUSH);
+				if (i == selectedIndex) {
+					RECT rc_hilite = RECT(rc.left - (i ? 1 : 0), rc.top, rc.right + 1, rc.top + 2);
+					FillRect(hdc, &rc_hilite, TAB_SELECTED_HILITE_BRUSH);
 				}
 
 				// tab text
-
-				//buf = create_unicode_buffer(text_max)
 				wchar_t buf[256];
 				TCITEMW	tc_item;
 				tc_item.mask = TCIF_TEXT;
-				// If item information is being retrieved, this member specifies the address of the buffer that receives the tab text.
-				tc_item.pszText = buf; // cast(buf, LPWSTR)
-				tc_item.cchTextMax = 255; // text_max
+				tc_item.pszText = buf;
+				tc_item.cchTextMax = 255;
 				SendMessageW(hWnd, TCM_GETITEMW, i, (LPARAM) & tc_item);
-
-				//DrawTextW(hdc, buf, -1, &rc, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
-
-				//if hilite_at_bottom:
-				//	user32.DrawTextW(hdc, self.get_item_text(idx), -1, RECT(rc.left, rc.top, rc.right, rc.bottom - 2), DT_SINGLELINE | DT_CENTER | DT_VCENTER)
-				//else:
-				RECT rc3 = RECT(rc.left, rc.top + 1, rc.right, rc.bottom);
-				DrawTextW(hdc, buf, -1, &rc3, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
-
-				//# tab close button
-				//if self.__close_button_imagelist:
-				//#                if idx == self.__close_button_hover_index:
-				//#                    user32.FillRect(hdc, byref(RECT(rc.right - 13, rc.top + 3, rc.right - 1, rc.top + 15)), MENU_BG_BRUSH_HOT)
-				//comctl32.ImageList_Draw(self.__close_button_imagelist, 1 if self.is_dark else 0, hdc, rc.right - 15 + 5, 3 + 5, ILD_NORMAL)
-				//if idx == self.__close_button_hover_index:
-				//user32.InvertRect(hdc, byref(RECT(rc.right - 13, rc.top + 3, rc.right - 1, rc.top + 15)))
+				RECT rc_text = RECT(rc.left, rc.top + 1, rc.right, rc.bottom);
+				DrawTextW(hdc, buf, -1, &rc_text, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
 			}
 
 			EndPaint(hWnd, &ps);
@@ -958,7 +935,7 @@ LRESULT CALLBACK StausBarClassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 	switch (uMsg)
 	{
 	case WM_PAINT: {
-		HFONT hfont = (HFONT)SendMessageW(hWnd, WM_GETFONT, 0, 0);
+		HFONT hfont = reinterpret_cast<HFONT>(SendMessageW(hWnd, WM_GETFONT, 0, 0));
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hWnd, &ps);
 		FillRect(hdc, &ps.rcPaint, BG_BRUSH_DARK);
@@ -966,7 +943,7 @@ LRESULT CALLBACK StausBarClassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 		SetBkMode(hdc, TRANSPARENT);
 		SetTextColor(hdc, TEXT_COLOR_DARK);
 		int text_len = SendMessageW(hWnd, SB_GETTEXTLENGTHW, 0, 0) + 1;
-		wchar_t* buf = (wchar_t*)malloc(sizeof(wchar_t) * text_len);
+		wchar_t* buf = static_cast<wchar_t*>(malloc(sizeof(wchar_t) * text_len));
 		SendMessageW(hWnd, SB_GETTEXTW, 0, (LPARAM)buf);
 		RECT rc = RECT(ps.rcPaint.left + 2, ps.rcPaint.top + 1, ps.rcPaint.right, ps.rcPaint.bottom - 1);
 		DrawTextW(hdc, buf, text_len, &rc, DT_SINGLELINE | DT_VCENTER | DT_LEFT);
@@ -978,7 +955,7 @@ LRESULT CALLBACK StausBarClassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 	case WM_ERASEBKGND:
 		return 0;
 	}
-	
+
 	return DefSubclassProc(hWnd, uMsg, wParam, lParam);
 }
 
@@ -1086,10 +1063,8 @@ void SciTEWin::Creation() {
 
 	TBBUTTON tbb[std::size(bbs)] = {};
 	unsigned int j = 0;
-	for (unsigned int i = 0; i < std::size(bbs); i++)
-	{
+	for (unsigned int i = 0; i < std::size(bbs); i++) {
 		tbb[i].iBitmap = bbs[i + 1].id > -1 ? j : -1;
-
 		tbb[i].idCommand = bbs[i + 1].cmd;
 		tbb[i].fsState = TBSTATE_ENABLED;
 		if (-1 == bbs[i + 1].id)
@@ -1098,7 +1073,7 @@ void SciTEWin::Creation() {
 			tbb[i].fsStyle = TBSTYLE_BUTTON;
 		tbb[i].dwData = 0;
 		tbb[i].iString = 0;
-		if (bbs[i + 1].id > -1) 
+		if (bbs[i + 1].id > -1)
 			j++;
 	}
 

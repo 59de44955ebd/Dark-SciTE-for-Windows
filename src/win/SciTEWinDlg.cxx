@@ -1609,18 +1609,15 @@ void SciTEWin::ParamGrab() {
 BOOL SciTEWin::ParametersMessage(HWND hDlg, UINT message, WPARAM wParam) {
 	switch (message) {
 
-	case WM_INITDIALOG:
-	{
+	case WM_INITDIALOG: {
 		LocaliseDialog(hDlg);
 		wParameters = hDlg;
 		Dialog dlg(hDlg);
-		if (modalParameters)
-		{
+		if (modalParameters) {
 			const GUI::gui_string sCommand = GUI::StringFromUTF8(parameterisedCommand);
 			dlg.SetItemText(IDCMD, sCommand);
 		}
-		for (int param = 0; param < maxParam; param++)
-		{
+		for (int param = 0; param < maxParam; param++) {
 			std::string paramText = StdStringFromInteger(param + 1);
 			std::string paramTextVal = props.GetString(paramText);
 			const GUI::gui_string sVal = GUI::StringFromUTF8(paramTextVal);
@@ -1634,21 +1631,17 @@ BOOL SciTEWin::ParametersMessage(HWND hDlg, UINT message, WPARAM wParam) {
 		break;
 
 	case WM_COMMAND:
-		if (ControlIDOfWParam(wParam) == IDCANCEL)
-		{
+		if (ControlIDOfWParam(wParam) == IDCANCEL) {
 			::EndDialog(hDlg, IDCANCEL);
-			if (!modalParameters)
-			{
+			if (!modalParameters) {
 				wParameters.Destroy();
 			}
 			return FALSE;
 		}
-		else if (ControlIDOfWParam(wParam) == IDOK)
-		{
+		else if (ControlIDOfWParam(wParam) == IDOK) {
 			ParamGrab();
 			::EndDialog(hDlg, IDOK);
-			if (!modalParameters)
-			{
+			if (!modalParameters) {
 				wParameters.Destroy();
 			}
 			return TRUE;
@@ -1665,24 +1658,19 @@ INT_PTR CALLBACK SciTEWin::ParametersDlg(HWND hDlg, UINT message, WPARAM wParam,
 
 bool SciTEWin::ParametersDialog(bool modal)
 {
-	if (wParameters.Created())
-	{
+	if (wParameters.Created()) {
 		ParamGrab();
-		if (!modal)
-		{
+		if (!modal) {
 			wParameters.Destroy();
 		}
 		return true;
 	}
 	bool success = false;
 	modalParameters = modal;
-	if (modal)
-	{
+	if (modal) {
 		success = DoDialog(TEXT("PARAMETERS"), ParametersDlg) == IDOK;
 		wParameters = NULL;
-	}
-	else
-	{
+	} else {
 		CreateParameterisedDialog(TEXT("PARAMETERSNONMODAL"), ParametersDlg);
 		wParameters.Show();
 	}
@@ -1695,8 +1683,7 @@ SciTEBase::MessageBoxChoice SciTEWin::WindowMessageBox(GUI::Window& w, const GUI
 	dialogsOnScreen++;
 	const int ret = ::MessageBoxW(HwndOf(w), msg.c_str(), appName, style | MB_SETFOREGROUND);
 	dialogsOnScreen--;
-	switch (ret)
-	{
+	switch (ret) {
 	case IDOK:
 		return MessageBoxChoice::ok;
 	case IDCANCEL:
@@ -1712,13 +1699,10 @@ SciTEBase::MessageBoxChoice SciTEWin::WindowMessageBox(GUI::Window& w, const GUI
 
 void SciTEWin::FindMessageBox(const std::string& msg, const std::string* findItem)
 {
-	if (!findItem)
-	{
+	if (!findItem) {
 		GUI::gui_string msgBuf = LocaliseMessage(msg.c_str());
 		WindowMessageBox(wFindReplace.Created() ? wFindReplace : wSciTE, msgBuf);
-	}
-	else
-	{
+	} else {
 		GUI::gui_string findThing = GUI::StringFromUTF8(*findItem);
 		GUI::gui_string msgBuf = LocaliseMessage(msg.c_str(), findThing.c_str());
 		WindowMessageBox(wFindReplace.Created() ? wFindReplace : wSciTE, msgBuf);
@@ -1780,16 +1764,14 @@ BOOL SciTEWin::AboutMessage(HWND hDlg, UINT message, WPARAM wParam) {
 }
 
 INT_PTR CALLBACK SciTEWin::AboutDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
-	if (message == WM_CTLCOLORDLG || message == WM_CTLCOLORSTATIC)
-	{
-		SetTextColor((HDC)wParam, TEXT_COLOR_DARK);
-		SetBkColor((HDC)wParam, BG_COLOR_DARK);
-		return (INT_PTR)BG_BRUSH_DARK;
+	if (message == WM_CTLCOLORDLG || message == WM_CTLCOLORSTATIC) {
+		SetTextColor(reinterpret_cast<HDC>(wParam), TEXT_COLOR_DARK);
+		SetBkColor(reinterpret_cast<HDC>(wParam), BG_COLOR_DARK);
+		return reinterpret_cast<INT_PTR>(BG_BRUSH_DARK);
 	}
-	if (message == WM_CTLCOLORBTN) //???
-	{
-		SetDCBrushColor((HDC)wParam, BG_COLOR_DARK);
-		return (INT_PTR)GetStockObject(DC_BRUSH);
+	if (message == WM_CTLCOLORBTN) {
+		SetDCBrushColor(reinterpret_cast<HDC>(wParam), BG_COLOR_DARK);
+		return reinterpret_cast<INT_PTR>(GetStockObject(DC_BRUSH));
 	}
 	return Caller(hDlg, message, lParam)->AboutMessage(hDlg, message, wParam);
 }

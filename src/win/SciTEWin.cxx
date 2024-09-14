@@ -2030,12 +2030,11 @@ LRESULT SciTEWin::WndProc(UINT iMessage, WPARAM wParam, LPARAM lParam) {
 		switch (iMessage) {
 
 		case WM_NCPAINT:
-		case WM_NCACTIVATE:
-		{
+		case WM_NCACTIVATE: {
 			DefWindowProcW(MainHWND(), iMessage, wParam, lParam);
 			RECT rcClient;
 			GetClientRect(MainHWND(), &rcClient);
-			MapWindowPoints(MainHWND(), NULL, (LPPOINT)&rcClient, 2);
+			MapWindowPoints(MainHWND(), NULL, reinterpret_cast<LPPOINT>(&rcClient), 2);
 			RECT rcWindow;
 			GetWindowRect(MainHWND(), &rcWindow);
 			OffsetRect(&rcClient, -rcWindow.left, -rcWindow.top);
@@ -2047,33 +2046,27 @@ LRESULT SciTEWin::WndProc(UINT iMessage, WPARAM wParam, LPARAM lParam) {
 			FillRect(hdc, &rcAnnoyingLine, BG_BRUSH_DARK);
 			ReleaseDC(MainHWND(), hdc);
 			return TRUE;
-			//return ::DefWindowProcW(MainHWND(), iMessage, wParam, lParam);
 		}
 
-		case WM_UAHDRAWMENU:
-		{
-			UAHMENU* pUDM = (UAHMENU*)lParam;
-			//pUDM = cast(lparam, POINTER(UAHMENU)).contents
+		case WM_UAHDRAWMENU: {
+			UAHMENU* pUDM = reinterpret_cast<UAHMENU*>(lParam);
 			MENUBARINFO mbi = MENUBARINFO();
 			mbi.cbSize = sizeof(MENUBARINFO);
 			GetMenuBarInfo(MainHWND(), OBJID_MENU, 0, &mbi);
 			RECT rc_win;
 			GetWindowRect(MainHWND(), &rc_win);
-			//rc = mbi.rcBar
 			OffsetRect(&mbi.rcBar, -rc_win.left, -rc_win.top);
 			FillRect(pUDM->hdc, &mbi.rcBar, MENUBAR_BG_BRUSH_DARK);
 			return TRUE;
 		}
 
-		case WM_UAHDRAWMENUITEM:
-		{
-			UAHDRAWMENUITEM* pUDMI = (UAHDRAWMENUITEM*)lParam;
+		case WM_UAHDRAWMENUITEM: {
+			UAHDRAWMENUITEM* pUDMI = reinterpret_cast<UAHDRAWMENUITEM*>(lParam);
 			MENUITEMINFOW mii = MENUITEMINFOW();
 			mii.cbSize = sizeof(MENUITEMINFOW);
 			mii.fMask = MIIM_STRING;
-			//buf = create_unicode_buffer('', 256)
 			WCHAR buf[256];
-			mii.dwTypeData = buf;// cast(buf, LPWSTR)
+			mii.dwTypeData = buf;
 			mii.cch = 256;
 			GetMenuItemInfoW(pUDMI->um.hmenu, pUDMI->umi.iPosition, TRUE, &mii);
 			if (pUDMI->dis.itemState & ODS_HOTLIGHT || pUDMI->dis.itemState & ODS_SELECTED)
@@ -2141,26 +2134,17 @@ LRESULT SciTEWin::WndProc(UINT iMessage, WPARAM wParam, LPARAM lParam) {
 
 		case WM_NOTIFY:
 		{
-			NMHDR* nmhdr = (NMHDR*)lParam;
-			if (nmhdr->code == NM_CUSTOMDRAW && nmhdr->idFrom == IDM_TOOLWIN) // nmhdr->hwndFrom == self.hwnd
-			{
-				NMTBCUSTOMDRAW* nmtb = (NMTBCUSTOMDRAW*)nmhdr;
-				if (nmtb->nmcd.dwDrawStage == CDDS_PREPAINT)
-				{
+			NMHDR* nmhdr = reinterpret_cast<NMHDR*>(lParam);
+			if (nmhdr->code == NM_CUSTOMDRAW && nmhdr->idFrom == IDM_TOOLWIN) {
+				NMTBCUSTOMDRAW* nmtb = reinterpret_cast<NMTBCUSTOMDRAW*>(nmhdr);
+				if (nmtb->nmcd.dwDrawStage == CDDS_PREPAINT) {
 					return CDRF_NOTIFYITEMDRAW | CDRF_NOTIFYPOSTERASE | TBCDRF_USECDCOLORS;
 				}
-				else if (nmtb->nmcd.dwDrawStage == CDDS_ITEMPREPAINT)
-				{
-					//nmtb.clrText = TEXT_COLOR_DARK
-
+				else if (nmtb->nmcd.dwDrawStage == CDDS_ITEMPREPAINT) {
 					// make button rect 1px smaller
-					nmtb->nmcd.rc.left += 1;
-					nmtb->nmcd.rc.right -= 1;
-					nmtb->nmcd.rc.top += 1; // 2
-					nmtb->nmcd.rc.bottom -= 1; // 2
+					InflateRect(&nmtb->nmcd.rc, -1, -1);
 
-					if (nmtb->nmcd.uItemState & CDIS_HOT)
-					{
+					if (nmtb->nmcd.uItemState & CDIS_HOT) {
 						FillRect(nmtb->nmcd.hdc, &nmtb->nmcd.rc, DARK_TOOLBAR_BUTTON_BORDER_BRUSH);
 
 						nmtb->nmcd.rc.left += 1;
@@ -2334,10 +2318,6 @@ LRESULT ContentWin::WndProc(UINT iMessage, WPARAM wParam, LPARAM lParam) {
 
 		case WM_ERASEBKGND: {
 				const RECT rc = {0, 0, 2000, 2000};
-				//HBRUSH hbrFace = CreateSolidBrush(::GetSysColor(COLOR_3DFACE));
-				//::FillRect(reinterpret_cast<HDC>(wParam), &rc, hbrFace);
-				//::DeleteObject(hbrFace);
-
 				FillRect(reinterpret_cast<HDC>(wParam), &rc, BG_BRUSH_DARK);
 				return 0;
 			}

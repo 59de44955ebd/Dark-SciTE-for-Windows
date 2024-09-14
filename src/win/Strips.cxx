@@ -155,24 +155,21 @@ LRESULT PASCAL BaseWin::StWndProc(
 		BaseWin *basePassed = static_cast<BaseWin *>(SetWindowPointerFromCreate(hWnd, lParam));
 		basePassed->SetID(hWnd);
 	}
-	if (iMessage == WM_CTLCOLORBTN)
-	{
+	if (iMessage == WM_CTLCOLORBTN) {
 		SetDCBrushColor((HDC)wParam, BG_COLOR_DARK);
-		return (LRESULT)GetStockObject(DC_BRUSH);
+		return reinterpret_cast<LRESULT>(GetStockObject(DC_BRUSH));
 	}
-	if (iMessage == WM_CTLCOLORSTATIC)
-	{
+	if (iMessage == WM_CTLCOLORSTATIC) {
 		SetTextColor((HDC)wParam, TEXT_COLOR_DARK);
 		SetBkColor((HDC)wParam, BG_COLOR_DARK);
 		SetDCBrushColor((HDC)wParam, BG_COLOR_DARK);
-		return (LRESULT)GetStockObject(DC_BRUSH);
+		return reinterpret_cast<LRESULT>(GetStockObject(DC_BRUSH));
 	}
-	if (iMessage == WM_CTLCOLOREDIT || iMessage == WM_CTLCOLORLISTBOX)
-	{
+	if (iMessage == WM_CTLCOLOREDIT || iMessage == WM_CTLCOLORLISTBOX) {
 		SetTextColor((HDC)wParam, TEXT_COLOR_DARK);
 		SetBkColor((HDC)wParam, CONTROL_BG_COLOR_DARK);
 		SetDCBrushColor((HDC)wParam, CONTROL_BG_COLOR_DARK);
-		return (LRESULT)GetStockObject(DC_BRUSH);
+		return reinterpret_cast<LRESULT>(GetStockObject(DC_BRUSH));
 	}
 	// Find C++ object associated with window.
 	BaseWin *base = static_cast<BaseWin *>(::PointerFromWindow(hWnd));
@@ -328,8 +325,7 @@ GUI::Window Strip::CreateButton(const char *text, size_t ident, bool check) {
 	if (check) {
 		height = bmpDimension + 3 * 2;
 		width = bmpDimension + 3 * 2;
-	}
-	else {
+	} else {
 		width = WidthText(fontText, localised);
 		height = 19 + 2 * ::GetSystemMetrics(SM_CYEDGE);
 		width += 2 * ::GetSystemMetrics(SM_CXEDGE);	// Allow for 3D borders
@@ -776,13 +772,6 @@ LRESULT Strip::WndProc(UINT iMessage, WPARAM wParam, LPARAM lParam) {
 			::EndPaint(Hwnd(), &ps);
 			return 0;
 		}
-
-	//case WM_ERASEBKGND:
-	//{
-	//	const RECT rc = { 0, 0, 2000, 2000 };
-	//	FillRect(reinterpret_cast<HDC>(wParam), &rc, BG_BRUSH_DARK);
-	//	return TRUE;
-	//}
 
 //#ifdef THEME_AVAILABLE
 //	case WM_THEMECHANGED:
