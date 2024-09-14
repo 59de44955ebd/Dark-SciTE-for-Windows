@@ -1,6 +1,6 @@
 .vs/
-tmp/
-x64/
-Win32/
-ARM64/
+/tmp
+/x64
+/Win32
+/ARM64
 *.aps
