@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35208.52
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SciTE", "SciTE.vcxproj", "{5641EA06-A73C-4297-B287-48B40850C708}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM64 = Debug|ARM64
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|ARM64 = Release|ARM64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5641EA06-A73C-4297-B287-48B40850C708}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{5641EA06-A73C-4297-B287-48B40850C708}.Debug|ARM64.Build.0 = Debug|ARM64
+		{5641EA06-A73C-4297-B287-48B40850C708}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5641EA06-A73C-4297-B287-48B40850C708}.Debug|Win32.Build.0 = Debug|Win32
+		{5641EA06-A73C-4297-B287-48B40850C708}.Debug|x64.ActiveCfg = Debug|x64
+		{5641EA06-A73C-4297-B287-48B40850C708}.Debug|x64.Build.0 = Debug|x64
+		{5641EA06-A73C-4297-B287-48B40850C708}.Release|ARM64.ActiveCfg = Release|ARM64
+		{5641EA06-A73C-4297-B287-48B40850C708}.Release|ARM64.Build.0 = Release|ARM64
+		{5641EA06-A73C-4297-B287-48B40850C708}.Release|Win32.ActiveCfg = Release|Win32
+		{5641EA06-A73C-4297-B287-48B40850C708}.Release|Win32.Build.0 = Release|Win32
+		{5641EA06-A73C-4297-B287-48B40850C708}.Release|x64.ActiveCfg = Release|x64
+		{5641EA06-A73C-4297-B287-48B40850C708}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2A9CCA6E-153F-45C5-B75C-07F7946BB2E1}
+	EndGlobalSection
+EndGlobal

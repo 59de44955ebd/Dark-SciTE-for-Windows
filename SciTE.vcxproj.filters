@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Manifest Include="SciTE.exe.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Cookie.cxx" />
+    <ClCompile Include="src\Credits.cxx" />
+    <ClCompile Include="src\EditorConfig.cxx" />
+    <ClCompile Include="src\ExportHTML.cxx" />
+    <ClCompile Include="src\ExportPDF.cxx" />
+    <ClCompile Include="src\ExportRTF.cxx" />
+    <ClCompile Include="src\ExportTEX.cxx" />
+    <ClCompile Include="src\ExportXML.cxx" />
+    <ClCompile Include="src\FilePath.cxx" />
+    <ClCompile Include="src\FileWorker.cxx" />
+    <ClCompile Include="src\IFaceTable.cxx" />
+    <ClCompile Include="src\JobQueue.cxx" />
+    <ClCompile Include="src\LuaExtension.cxx" />
+    <ClCompile Include="src\MatchMarker.cxx" />
+    <ClCompile Include="src\MultiplexExtension.cxx" />
+    <ClCompile Include="src\PathMatch.cxx" />
+    <ClCompile Include="src\PropSetFile.cxx" />
+    <ClCompile Include="src\ScintillaWindow.cxx" />
+    <ClCompile Include="src\SciTEBase.cxx" />
+    <ClCompile Include="src\SciTEBuffers.cxx" />
+    <ClCompile Include="src\SciTEIO.cxx" />
+    <ClCompile Include="src\SciTEProps.cxx" />
+    <ClCompile Include="src\StringHelpers.cxx" />
+    <ClCompile Include="src\StringList.cxx" />
+    <ClCompile Include="src\StyleDefinition.cxx" />
+    <ClCompile Include="src\StyleWriter.cxx" />
+    <ClCompile Include="src\Utf8_16.cxx" />
+    <ClCompile Include="lua\src\lapi.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lauxlib.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lbaselib.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lbitlib.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lcode.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lcorolib.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lctype.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\ldblib.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\ldebug.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\ldo.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\ldump.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lfunc.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lgc.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\linit.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\liolib.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\llex.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lmathlib.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lmem.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\loadlib.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lobject.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lopcodes.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\loslib.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lparser.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lstate.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lstring.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lstrlib.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\ltable.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\ltablib.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\ltm.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lzio.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lundump.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lutf8lib.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\src\lvm.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="src\win\Dark.cxx">
+      <Filter>Win</Filter>
+    </ClCompile>
+    <ClCompile Include="src\win\DirectorExtension.cxx">
+      <Filter>Win</Filter>
+    </ClCompile>
+    <ClCompile Include="src\win\GUIWin.cxx">
+      <Filter>Win</Filter>
+    </ClCompile>
+    <ClCompile Include="src\win\SciTEWin.cxx">
+      <Filter>Win</Filter>
+    </ClCompile>
+    <ClCompile Include="src\win\SciTEWinBar.cxx">
+      <Filter>Win</Filter>
+    </ClCompile>
+    <ClCompile Include="src\win\SciTEWinDlg.cxx">
+      <Filter>Win</Filter>
+    </ClCompile>
+    <ClCompile Include="src\win\Strips.cxx">
+      <Filter>Win</Filter>
+    </ClCompile>
+    <ClCompile Include="src\win\UniqueInstance.cxx ">
+      <Filter>Win</Filter>
+    </ClCompile>
+    <ClCompile Include="lexilla\access\LexillaAccess.cxx" />
+    <ClCompile Include="scintilla\call\ScintillaCall.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Cookie.h" />
+    <ClInclude Include="src\EditorConfig.h" />
+    <ClInclude Include="src\Extender.h" />
+    <ClInclude Include="src\FilePath.h" />
+    <ClInclude Include="src\FileWorker.h" />
+    <ClInclude Include="src\GUI.h" />
+    <ClInclude Include="src\IFaceTable.h" />
+    <ClInclude Include="src\JobQueue.h" />
+    <ClInclude Include="src\LuaExtension.h" />
+    <ClInclude Include="src\MatchMarker.h" />
+    <ClInclude Include="src\MultiplexExtension.h" />
+    <ClInclude Include="src\PathMatch.h" />
+    <ClInclude Include="src\PropSetFile.h" />
+    <ClInclude Include="src\ScintillaWindow.h" />
+    <ClInclude Include="src\SciTE.h" />
+    <ClInclude Include="src\SciTEBase.h" />
+    <ClInclude Include="src\SciTEKeys.h" />
+    <ClInclude Include="src\scite_lua_win.h" />
+    <ClInclude Include="src\Searcher.h" />
+    <ClInclude Include="src\StringHelpers.h" />
+    <ClInclude Include="src\StringList.h" />
+    <ClInclude Include="src\StripDefinition.h" />
+    <ClInclude Include="src\StyleDefinition.h" />
+    <ClInclude Include="src\StyleWriter.h" />
+    <ClInclude Include="src\Utf8_16.h" />
+    <ClInclude Include="src\Worker.h" />
+    <ClInclude Include="src\win\Dark.h">
+      <Filter>Win</Filter>
+    </ClInclude>
+    <ClInclude Include="src\win\DirectorExtension.h">
+      <Filter>Win</Filter>
+    </ClInclude>
+    <ClInclude Include="src\win\DLLFunction.h">
+      <Filter>Win</Filter>
+    </ClInclude>
+    <ClInclude Include="src\win\IatHook.h">
+      <Filter>Win</Filter>
+    </ClInclude>
+    <ClInclude Include="src\win\SciTEWin.h">
+      <Filter>Win</Filter>
+    </ClInclude>
+    <ClInclude Include="src\win\Strips.h">
+      <Filter>Win</Filter>
+    </ClInclude>
+    <ClInclude Include="src\win\UniqueInstance.h">
+      <Filter>Win</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SciTERes.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\SciBall.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Lua">
+      <UniqueIdentifier>{b64ae8a1-8e6e-4f75-9f80-74bf2a111bc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Win">
+      <UniqueIdentifier>{b5ec9c9f-5845-46c6-8beb-0bcd6a6e30f2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
