@@ -2070,7 +2070,7 @@ LRESULT SciTEWin::WndProc(UINT iMessage, WPARAM wParam, LPARAM lParam) {
 			mii.cch = 256;
 			GetMenuItemInfoW(pUDMI->um.hmenu, pUDMI->umi.iPosition, TRUE, &mii);
 			if (pUDMI->dis.itemState & ODS_HOTLIGHT || pUDMI->dis.itemState & ODS_SELECTED)
-				FillRect(pUDMI->um.hdc, &pUDMI->dis.rcItem, MENU_BG_BRUSH_HOT);
+				FillRect(pUDMI->um.hdc, &pUDMI->dis.rcItem, MENUBAR_BG_BRUSH_HOT_DARK);
 			else
 				FillRect(pUDMI->um.hdc, &pUDMI->dis.rcItem, MENUBAR_BG_BRUSH_DARK);
 			SetBkMode(pUDMI->um.hdc, TRANSPARENT);

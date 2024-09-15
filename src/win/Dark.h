@@ -10,7 +10,7 @@ static COLORREF TEXT_COLOR_DARK = 0xe0e0e0;
 static HBRUSH BG_BRUSH_DARK = CreateSolidBrush(BG_COLOR_DARK);
 
 static HBRUSH MENUBAR_BG_BRUSH_DARK = CreateSolidBrush(COLORREF(0x2b2b2b));
-static HBRUSH MENU_BG_BRUSH_HOT = CreateSolidBrush(COLORREF(0x3e3e3e));
+static HBRUSH MENUBAR_BG_BRUSH_HOT_DARK = CreateSolidBrush(COLORREF(0x3e3e3e));
 
 static COLORREF CONTROL_BG_COLOR_DARK = COLORREF(0x333333);
 static HBRUSH CONTROL_BG_BRUSH_DARK = CreateSolidBrush(CONTROL_BG_COLOR_DARK);
@@ -38,7 +38,7 @@ static HBRUSH DARK_TOOLBAR_BUTTON_ROLLOVER_BG_BRUSH = CreateSolidBrush(DARK_TOOL
 
 // for testing stuff
 //#define DBGI(x) {char dbg[32];sprintf(dbg,"%ld",x);OutputDebugStringA(dbg);}
-//static HBRUSH BRUSH_YELLOW = CreateSolidBrush(COLORREF(0x00ffff));
+static HBRUSH BRUSH_YELLOW = CreateSolidBrush(COLORREF(0x00ffff));
 
 #define STATUSBAR_SUBCLASS_ID 1
 

@@ -1042,9 +1042,9 @@ void SciTEWin::Creation() {
 		tbLarge ? MAKEINTRESOURCE(IDR_TOOLBAR24) : MAKEINTRESOURCE(IDR_TOOLBAR),
 		tbLarge ? 24 : 16,
 		0,
-		CLR_DEFAULT,
+		CLR_NONE,
 		IMAGE_BITMAP,
-		LR_DEFAULTCOLOR
+		LR_CREATEDIBSECTION
 	);
 
 	SendMessageW(hwndToolBar, TB_SETIMAGELIST, 0, reinterpret_cast<LPARAM>(himl));
@@ -1054,9 +1054,9 @@ void SciTEWin::Creation() {
 		tbLarge ? MAKEINTRESOURCE(IDR_TOOLBAR24_DISABLED) : MAKEINTRESOURCE(IDR_TOOLBAR_DISABLED),
 		tbLarge ? 24 : 16,
 		0,
-		CLR_DEFAULT,
+		CLR_NONE,
 		IMAGE_BITMAP,
-		LR_DEFAULTCOLOR
+		LR_CREATEDIBSECTION
 	);
 
 	SendMessageW(hwndToolBar, TB_SETDISABLEDIMAGELIST, 0, reinterpret_cast<LPARAM>(himl_disabled));
