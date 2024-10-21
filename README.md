@@ -9,7 +9,7 @@ Dark mode hacked into [SciTE](https://www.scintilla.org/SciTE.html) v5.5.2 for W
 ## Notes
 
 The repository only contains the (slightly rearranged) SciTE code, not the Lexilla and Scintilla code.
-Instead pre-compiled (unaltered) Lexilla and Scintilla DLLs are provided for x64, Win32  and ARM64.
+Instead pre-compiled Lexilla and Scintilla DLLs are provided for x64, Win32  and ARM64.
 
 This project is about dark mode for the application's GUI, not about dark styles inside the editor. But for convenience also some simple dark style is provided as [SciTEDark.properties](properties/SciTEDark.properties) and activated by default, please edit this file to fit your needs or replace it with a more sophisticate dark style of your choice.
 
